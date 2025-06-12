@@ -57,15 +57,21 @@ class AudioTranscriber:
         self.model = None
 
         # Determine device to use
-        if self.use_gpu and torch.cuda.is_available():
-            self.device = "cuda"
-            print(f"🚀 GPU acceleration enabled: {torch.cuda.get_device_name(0)}")
+        if self.use_gpu:
+            if torch.cuda.is_available():
+                self.device = "cuda"
+                print(f"🚀 CUDA acceleration enabled: {torch.cuda.get_device_name(0)}")
+            elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+                self.device = "mps"
+                print("🍎 MPS acceleration enabled: Apple Silicon GPU")
+            else:
+                self.device = "cpu"
+                print(
+                    "⚠️ GPU requested but neither CUDA nor MPS available, falling back to CPU"
+                )
         else:
             self.device = "cpu"
-            if self.use_gpu and not torch.cuda.is_available():
-                print("⚠️ GPU requested but CUDA not available, falling back to CPU")
-            else:
-                print("🖥️ Using CPU for processing")
+            print("🖥️ Using CPU for processing")
 
         # Create output directory
         self.output_dir.mkdir(exist_ok=True)
@@ -341,8 +347,11 @@ Available Whisper Models:
   large  - Best accuracy, ~10GB VRAM
 
 GPU Acceleration:
-  --use-gpu - Enable GPU acceleration (requires CUDA-enabled PyTorch)
-  GPU provides 2-5x speed improvement over CPU processing
+  --use-gpu - Enable GPU acceleration (Auto-detects CUDA/MPS)
+  
+  Windows/Linux + NVIDIA: CUDA acceleration (3-5x faster)
+  macOS + Apple Silicon: MPS acceleration (2-3x faster)
+  Fallback: CPU processing if GPU unavailable
         """,
     )
 

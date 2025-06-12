@@ -11,4 +11,9 @@ openai-whisper>=20231117  # OpenAI Whisper for speech recognition
 # - ffmpeg: Required for audio processing
 #   - Windows: Download from https://ffmpeg.org/ or use chocolatey/scoop
 #   - macOS: brew install ffmpeg  
-#   - Linux: sudo apt install ffmpeg (Ubuntu/Debian) or equivalent 
+#   - Linux: sudo apt install ffmpeg (Ubuntu/Debian) or equivalent
+
+# GPU Acceleration (optional):
+# - CUDA PyTorch: pip install torch --index-url https://download.pytorch.org/whl/cu121
+# - MPS (Apple Silicon): Included in standard PyTorch for macOS
+# - Use --use-gpu flag to enable GPU acceleration 

@@ -212,6 +212,43 @@ Thanks to yt-dlp, this script supports 1000+ websites including:
 - **Educational:** Coursera, edX, Khan Academy
 - **Direct media files:** MP3, MP4, WAV, etc.
 
+## GPU Acceleration 🚀
+
+The script automatically detects and uses the best available acceleration:
+
+### Windows/Linux (NVIDIA GPUs)
+
+```bash
+# Install CUDA-enabled PyTorch
+pip uninstall torch torchvision torchaudio
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Use CUDA acceleration
+python audio_transcription.py "URL" --use-gpu --model base
+```
+
+**Performance:** 3-5x faster than CPU
+
+### macOS (Apple Silicon M1/M2/M3)
+
+```bash
+# MPS is included in standard PyTorch for macOS
+pip install torch torchvision torchaudio
+
+# Use MPS acceleration
+python audio_transcription.py "URL" --use-gpu --model base
+```
+
+**Performance:** 2-3x faster than CPU
+
+### Auto-Detection
+
+The script automatically detects and uses the best available acceleration:
+
+- **NVIDIA GPU:** CUDA acceleration
+- **Apple Silicon:** MPS acceleration
+- **Fallback:** CPU processing
+
 ## Performance Tips
 
 1. **Model Selection:**
@@ -225,7 +262,7 @@ Thanks to yt-dlp, this script supports 1000+ websites including:
 
 3. **Hardware:**
 
-   - GPU acceleration automatically used when available
+   - Use `--use-gpu` for 2-5x speed improvement
    - More RAM = can use larger models
 
 4. **Audio Quality:**
