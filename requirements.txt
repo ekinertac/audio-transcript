@@ -3,6 +3,7 @@
 # Core dependencies
 yt-dlp>=2023.12.30        # For downloading audio/video from URLs
 openai-whisper>=20231117  # OpenAI Whisper for speech recognition
+gradio>=4.0.0             # Web UI for audio transcription
 
 # Optional: Enhanced Whisper with better features
 # whisperx>=3.1.1         # Uncomment for WhisperX (requires additional setup)
