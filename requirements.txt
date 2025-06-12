@@ -1,0 +1,14 @@
+# Audio Transcription Requirements
+
+# Core dependencies
+yt-dlp>=2023.12.30        # For downloading audio/video from URLs
+openai-whisper>=20231117  # OpenAI Whisper for speech recognition
+
+# Optional: Enhanced Whisper with better features
+# whisperx>=3.1.1         # Uncomment for WhisperX (requires additional setup)
+
+# System dependencies (install separately):
+# - ffmpeg: Required for audio processing
+#   - Windows: Download from https://ffmpeg.org/ or use chocolatey/scoop
+#   - macOS: brew install ffmpeg  
+#   - Linux: sudo apt install ffmpeg (Ubuntu/Debian) or equivalent 
